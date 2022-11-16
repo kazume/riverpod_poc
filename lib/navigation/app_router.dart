@@ -17,19 +17,17 @@ class AppRouter extends RouterDelegate
     return Consumer(
       builder: (context, ref, child) {
         final navState = ref.watch(navigationNotifierProvider);
-        final isOnboardingComplete = ref.watch(onboardedProvider);
+        final isOnboarded = ref.watch(onboardedProvider);
         return Navigator(
-          restorationScopeId: 'riverpodPocRestorationScopeId',
           key: navigatorKey,
           observers: [HeroController()],
           transitionDelegate: const DefaultTransitionDelegate(),
           onPopPage: (route, result) => _handlePopPage(ref, route, result),
           pages: [
-            if (!isOnboardingComplete) OnboardingScreen.page(),
-            if (isOnboardingComplete && navState.isLoggedIn) HomeScreen.page(),
-            if (isOnboardingComplete && !navState.isLoggedIn)
-              LoginScreen.page(),
-            if (isOnboardingComplete && navState.isSettingsSelected)
+            if (!isOnboarded) OnboardingScreen.page(),
+            if (isOnboarded && navState.isLoggedIn) HomeScreen.page(),
+            if (isOnboarded && !navState.isLoggedIn) LoginScreen.page(),
+            if (isOnboarded && navState.isSettingsSelected)
               SettingsScreen.page(),
           ],
         );
