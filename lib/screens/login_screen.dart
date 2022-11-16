@@ -27,7 +27,7 @@ class LoginScreen extends ConsumerWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            ref.read(navigationControllerProvider.notifier).setLoggedIn(true);
+            ref.read(navigationNotifierProvider.notifier).setLoggedIn(true);
           },
           child: const Text('LOGIN'),
         ),

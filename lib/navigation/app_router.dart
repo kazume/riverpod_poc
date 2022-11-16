@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_poc/preferences/preferences.dart';
 
 import '../navigation/navigation_state.dart';
 import '../screens/screens.dart';
@@ -15,7 +16,8 @@ class AppRouter extends RouterDelegate
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final navState = ref.watch(navigationControllerProvider);
+        final navState = ref.watch(navigationNotifierProvider);
+        final isOnboardingComplete = ref.watch(onboardedProvider);
         return Navigator(
           restorationScopeId: 'riverpodPocRestorationScopeId',
           key: navigatorKey,
@@ -23,9 +25,12 @@ class AppRouter extends RouterDelegate
           transitionDelegate: const DefaultTransitionDelegate(),
           onPopPage: (route, result) => _handlePopPage(ref, route, result),
           pages: [
-            if (navState.isLoggedIn) Home.page(),
-            if (!navState.isLoggedIn) LoginScreen.page(),
-            if (navState.isSettingsSelected) SettingsScreen.page(),
+            if (!isOnboardingComplete) OnboardingScreen.page(),
+            if (isOnboardingComplete && navState.isLoggedIn) HomeScreen.page(),
+            if (isOnboardingComplete && !navState.isLoggedIn)
+              LoginScreen.page(),
+            if (isOnboardingComplete && navState.isSettingsSelected)
+              SettingsScreen.page(),
           ],
         );
       },
@@ -37,7 +42,7 @@ class AppRouter extends RouterDelegate
 
   bool _handlePopPage(WidgetRef ref, Route<dynamic> route, result) {
     final navigationController = ref.read(
-      navigationControllerProvider.notifier,
+      navigationNotifierProvider.notifier,
     );
     if (!route.didPop(result)) {
       return false;

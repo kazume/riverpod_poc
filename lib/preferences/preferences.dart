@@ -8,17 +8,17 @@ final onboardedProvider = StateProvider<bool>(
   (ref) => ref.watch(settingsNotifierProvider).onboardingComplete,
 );
 
-class OnboardedNotifier extends Notifier<bool> {
-  setOnboarded(bool onboarded) {
-    state = onboarded;
-    ref.read(_settingsServiceProvider).setOnboardingComplete(onboarded);
-  }
-
-  @override
-  bool build() {
-    return ref.read(_settingsServiceProvider).onboardingComplete();
-  }
-}
+// class OnboardedNotifier extends Notifier<bool> {
+//   setOnboarded(bool onboarded) {
+//     state = onboarded;
+//     ref.read(_settingsServiceProvider).setOnboardingComplete(onboarded);
+//   }
+//
+//   @override
+//   bool build() {
+//     return ref.read(_settingsServiceProvider).onboardingComplete();
+//   }
+// }
 
 final _settingsServiceProvider = Provider<SettingsService>((ref) {
   final sharedPreferences = ref.watch(sharedPreferencesProvider);
@@ -54,9 +54,9 @@ class SettingsNotifier extends Notifier<SettingsState> {
     );
   }
 
-  setOnboardingComplete(bool onboarding) {
-    state = state.copyWith(onboardingComplete: onboarding);
-    ref.read(_settingsServiceProvider).setOnboardingComplete(onboarding);
+  setOnboardingComplete(bool complete) {
+    state = state.copyWith(onboardingComplete: complete);
+    ref.read(_settingsServiceProvider).setOnboardingComplete(complete);
   }
 
   setThemeMode(ThemeMode themeMode) {

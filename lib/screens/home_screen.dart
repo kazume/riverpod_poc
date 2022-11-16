@@ -6,12 +6,12 @@ import '../navigation/navigation_state.dart';
 import '../preferences/preferences.dart';
 import '../screens/screens.dart';
 
-class Home extends ConsumerWidget {
+class HomeScreen extends ConsumerWidget {
   static FadingPage page() {
     return const FadingPage(
       name: Screens.home,
       key: ValueKey(Screens.home),
-      child: Home(
+      child: HomeScreen(
         title: 'Home',
       ),
     );
@@ -19,7 +19,7 @@ class Home extends ConsumerWidget {
 
   final String title;
 
-  const Home({super.key, required this.title});
+  const HomeScreen({super.key, required this.title});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +29,7 @@ class Home extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () => ref
-                .read(navigationControllerProvider.notifier)
+                .read(navigationNotifierProvider.notifier)
                 .setSettingsSelected(true),
             icon: const Icon(Icons.settings),
           ),
@@ -54,7 +54,7 @@ class Home extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(navigationControllerProvider.notifier).setLoggedIn(false);
+          ref.read(navigationNotifierProvider.notifier).setLoggedIn(false);
         },
         tooltip: 'Clear',
         child: const Icon(Icons.clear),

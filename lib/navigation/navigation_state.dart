@@ -3,16 +3,17 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_poc/preferences/preferences.dart';
 
-final navigationControllerProvider =
-    NotifierProvider<NavigationController, NavigationState>(
-  () => NavigationController(),
+final navigationNotifierProvider =
+    NotifierProvider<NavigationNotifier, NavigationState>(
+  () => NavigationNotifier(),
 );
 
-class NavigationController extends Notifier<NavigationState> {
+class NavigationNotifier extends Notifier<NavigationState> {
   @override
   NavigationState build() {
-    return const NavigationState(
+    return NavigationState(
       isLoggedIn: false,
       isSettingsSelected: false,
     );
