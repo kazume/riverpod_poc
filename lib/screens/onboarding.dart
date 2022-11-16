@@ -13,10 +13,10 @@ class Onboarding extends StatelessWidget {
             const Text('Onboarding'),
             Consumer(
               builder: (_, ref, __) {
-                final settings = ref.read(settingsServiceProvider);
+                final settings = ref.read(settingsNotifierProvider);
                 return ElevatedButton(
                   onPressed: () => ref
-                      .read(settingsStateProvider.notifier)
+                      .read(settingsNotifierProvider.notifier)
                       .setOnboardingComplete(true),
                   child: const Text('GO'),
                 );

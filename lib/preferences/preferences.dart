@@ -2,34 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final isOnboardedProvider =
-    StateNotifierProvider<OnboardedState, bool>((ref) => OnboardedState(ref));
+import '../main.dart';
 
-class OnboardedState extends StateNotifier<bool> {
-  final Ref ref;
+final onboardedProvider = StateProvider<bool>(
+  (ref) => ref.watch(settingsNotifierProvider).onboardingComplete,
+);
 
-  OnboardedState(this.ref) : super(false) {
-    state = ref.read(settingsServiceProvider).onboardingComplete();
-  }
-
+class OnboardedNotifier extends Notifier<bool> {
   setOnboarded(bool onboarded) {
     state = onboarded;
-    ref.read(settingsServiceProvider).setOnboardingComplete(onboarded);
+    ref.read(_settingsServiceProvider).setOnboardingComplete(onboarded);
+  }
+
+  @override
+  bool build() {
+    return ref.read(_settingsServiceProvider).onboardingComplete();
   }
 }
 
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError();
-});
-
-final settingsServiceProvider = Provider<SettingsService>((ref) {
+final _settingsServiceProvider = Provider<SettingsService>((ref) {
   final sharedPreferences = ref.watch(sharedPreferencesProvider);
   return SettingsService(sharedPreferences);
 });
 
-final settingsStateProvider =
-    NotifierProvider<SettingsController, SettingsState>(
-  () => SettingsController(),
+final settingsNotifierProvider =
+    NotifierProvider<SettingsNotifier, SettingsState>(
+  () => SettingsNotifier(),
 );
 
 @immutable
@@ -46,15 +44,10 @@ class SettingsState {
       );
 }
 
-class SettingsController extends Notifier<SettingsState> {
-  late final SettingsService settingsService;
-
-  SettingsController() {
-    settingsService = ref.read(settingsServiceProvider);
-  }
-
+class SettingsNotifier extends Notifier<SettingsState> {
   @override
   SettingsState build() {
+    final settingsService = ref.read(_settingsServiceProvider);
     return SettingsState(
       settingsService.onboardingComplete(),
       settingsService.themeMode(),
@@ -63,23 +56,24 @@ class SettingsController extends Notifier<SettingsState> {
 
   setOnboardingComplete(bool onboarding) {
     state = state.copyWith(onboardingComplete: onboarding);
-    ref.read(settingsServiceProvider).setOnboardingComplete(onboarding);
+    ref.read(_settingsServiceProvider).setOnboardingComplete(onboarding);
   }
 
-  setThemeMode(ThemeMode themeMode) => state = state.copyWith(
-        themeMode: themeMode,
-      );
+  setThemeMode(ThemeMode themeMode) {
+    state = state.copyWith(themeMode: themeMode);
+    ref.read(_settingsServiceProvider).setThemeMode(themeMode);
+  }
 
   toggleThemeMode() {
     switch (state.themeMode) {
       case ThemeMode.system:
-        state = state.copyWith(themeMode: ThemeMode.light);
+        setThemeMode(ThemeMode.light);
         break;
       case ThemeMode.light:
-        state = state.copyWith(themeMode: ThemeMode.dark);
+        setThemeMode(ThemeMode.dark);
         break;
       case ThemeMode.dark:
-        state = state.copyWith(themeMode: ThemeMode.system);
+        setThemeMode(ThemeMode.system);
         break;
     }
   }

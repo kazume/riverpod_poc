@@ -40,11 +40,11 @@ class Home extends ConsumerWidget {
           children: [
             const Text('Home'),
             Text(
-              'Mode: ${ref.watch(settingsStateProvider).themeMode.name}',
+              'Mode: ${ref.watch(settingsNotifierProvider).themeMode.name}',
             ),
             ElevatedButton(
               onPressed: () => ref
-                  .read(settingsStateProvider.notifier)
+                  .read(settingsNotifierProvider.notifier)
                   .toggleThemeMode(),
               child: const Text('toggle mode'),
             ),

@@ -10,17 +10,11 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Riverpod Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      themeMode: ref.watch(
-        settingsStateProvider.select((state) => state.themeMode),
-      ),
+      themeMode: ref.watch(settingsNotifierProvider).themeMode,
       home: Router(
-        restorationScopeId: 'riverpodPocRestorationScopeId',
         routerDelegate: AppRouter(),
         backButtonDispatcher: RootBackButtonDispatcher(),
       ),

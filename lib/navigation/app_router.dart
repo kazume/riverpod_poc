@@ -17,6 +17,7 @@ class AppRouter extends RouterDelegate
       builder: (context, ref, child) {
         final navState = ref.watch(navigationControllerProvider);
         return Navigator(
+          restorationScopeId: 'riverpodPocRestorationScopeId',
           key: navigatorKey,
           observers: [HeroController()],
           transitionDelegate: const DefaultTransitionDelegate(),
