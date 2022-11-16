@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_poc/elements/pages.dart';
-import 'package:riverpod_poc/navigation/navigation_state.dart';
-import 'package:riverpod_poc/screens/screens.dart';
+
+import '../elements/pages.dart';
+import '../navigation/navigation_state.dart';
+import '../screens/screens.dart';
 
 class LoginScreen extends ConsumerWidget {
   static FadingPage page() {

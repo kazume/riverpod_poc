@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_poc/preferences/preferences.dart';
+
+import '../preferences/preferences.dart';
 
 class Onboarding extends StatelessWidget {
   @override

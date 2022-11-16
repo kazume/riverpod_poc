@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_poc/app/app.dart';
-import 'package:riverpod_poc/preferences/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
+
+import '../app/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

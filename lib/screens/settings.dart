@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_poc/screens/screens.dart';
+
+import '../screens/screens.dart';
 
 class SettingsScreen extends StatelessWidget {
   static MaterialPage page() {
