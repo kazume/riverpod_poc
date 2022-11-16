@@ -20,7 +20,6 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('build Login');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),

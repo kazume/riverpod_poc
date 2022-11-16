@@ -23,7 +23,6 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('Build Home');
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -38,23 +37,25 @@ class Home extends ConsumerWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Home'),
             Text(
               'Mode: ${ref.watch(settingsNotifierProvider).themeMode.name}',
             ),
             ElevatedButton(
-              onPressed: () => ref
-                  .read(settingsNotifierProvider.notifier)
-                  .toggleThemeMode(),
+              onPressed: () {
+                ref.read(settingsNotifierProvider.notifier).toggleThemeMode();
+              },
               child: const Text('toggle mode'),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            ref.read(navigationControllerProvider.notifier).setLoggedIn(false),
+        onPressed: () {
+          ref.read(navigationControllerProvider.notifier).setLoggedIn(false);
+        },
         tooltip: 'Clear',
         child: const Icon(Icons.clear),
       ),
