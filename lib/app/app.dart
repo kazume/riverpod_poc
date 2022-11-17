@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app_constants.dart';
-import 'app_router.dart';
-import 'settings_notifier.dart';
+import 'navigation/app_router.dart';
+import 'settings/settings_notifier.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../ui/screens.dart';
+import '../../ui/screens/screens.dart';
 import 'navigation_notifier.dart';
 
 class AppRouter extends RouterDelegate
