@@ -17,7 +17,10 @@ class AppRouter extends RouterDelegate
     return Consumer(
       builder: (context, ref, child) {
         final navState = ref.watch(navigationNotifierProvider);
-        final isOnboarded = ref.watch(onboardedProvider);
+        final isOnboarded = navState.isOnboarded;
+        // ref.watch(settingsNotifierProvider
+        //     .select((value) => value.onboardingComplete));
+
         return Navigator(
           key: navigatorKey,
           observers: [HeroController()],

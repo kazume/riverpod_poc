@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_poc/navigation/navigation_state.dart';
 
 import '../elements/pages.dart';
 import '../preferences/preferences.dart';
@@ -26,8 +27,8 @@ class OnboardingScreen extends ConsumerWidget {
             const Text('Onboarding'),
             ElevatedButton(
               onPressed: () => ref
-                  .read(settingsNotifierProvider.notifier)
-                  .setOnboardingComplete(true),
+                  .read(navigationNotifierProvider.notifier)
+                  .setOnboarded(true),
               child: const Text('GO'),
             ),
           ],

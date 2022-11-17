@@ -7,15 +7,16 @@ import 'package:riverpod_poc/preferences/preferences.dart';
 
 final navigationNotifierProvider =
     NotifierProvider<NavigationNotifier, NavigationState>(
-  () => NavigationNotifier(),
-);
+        NavigationNotifier.new);
 
 class NavigationNotifier extends Notifier<NavigationState> {
   @override
   NavigationState build() {
+    final settings = ref.read(settingsNotifierProvider);
     return NavigationState(
       isLoggedIn: false,
       isSettingsSelected: false,
+      isOnboarded: settings.onboardingComplete,
     );
   }
 
@@ -25,6 +26,18 @@ class NavigationNotifier extends Notifier<NavigationState> {
 
   void setLoggedIn(bool loggedIn) {
     state = state.copyWith(isLoggedIn: loggedIn);
+  }
+
+  void setOnboarded(bool onboarded) {
+    state = state.copyWith(
+      isOnboarded: onboarded,
+      isLoggedIn: onboarded && state.isLoggedIn,
+      isSettingsSelected: onboarded && state.isSettingsSelected,
+    );
+
+    ref
+        .read(settingsNotifierProvider.notifier)
+        .setOnboardingComplete(onboarded);
   }
 
   void exitApp() {
@@ -40,19 +53,23 @@ class NavigationNotifier extends Notifier<NavigationState> {
 class NavigationState {
   final bool isLoggedIn;
   final bool isSettingsSelected;
+  final bool isOnboarded;
 
   const NavigationState({
     required this.isLoggedIn,
     required this.isSettingsSelected,
+    required this.isOnboarded,
   });
 
   NavigationState copyWith({
     bool? isLoggedIn,
     bool? isSettingsSelected,
+    bool? isOnboarded,
   }) {
     return NavigationState(
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       isSettingsSelected: isSettingsSelected ?? this.isSettingsSelected,
+      isOnboarded: isOnboarded ?? this.isOnboarded,
     );
   }
 }
