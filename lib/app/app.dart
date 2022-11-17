@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../navigation/app_router.dart';
-import '../preferences/preferences.dart';
+import '../settings/settings.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});

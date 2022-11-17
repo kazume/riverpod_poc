@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_poc/navigation/navigation_state.dart';
-import 'package:riverpod_poc/preferences/preferences.dart';
 
-import '../screens/screens.dart';
+import 'screens.dart';
 
 class SettingsScreen extends StatelessWidget {
   static MaterialPage page() {

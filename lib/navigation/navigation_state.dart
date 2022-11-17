@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_poc/preferences/preferences.dart';
+
+import '../settings/settings.dart';
 
 final navigationNotifierProvider =
     NotifierProvider<NavigationNotifier, NavigationState>(
-        NavigationNotifier.new);
+  NavigationNotifier.new,
+);
 
 class NavigationNotifier extends Notifier<NavigationState> {
   @override
