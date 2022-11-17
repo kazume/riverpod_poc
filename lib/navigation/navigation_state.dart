@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../settings/settings.dart';
+import '../presentation/state/settings_state.dart';
 
 final navigationNotifierProvider =
     NotifierProvider<NavigationNotifier, NavigationState>(

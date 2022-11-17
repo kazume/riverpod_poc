@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/repositories/settings_repository.dart';
-
-final settingsNotifierProvider =
-    NotifierProvider<SettingsNotifier, SettingsState>(
-  () => SettingsNotifier(),
-);
+import '../../data/repositories/settings_repository.dart';
 
 @immutable
 class SettingsState {
@@ -56,3 +51,8 @@ class SettingsNotifier extends Notifier<SettingsState> {
     }
   }
 }
+
+final settingsNotifierProvider =
+NotifierProvider<SettingsNotifier, SettingsState>(
+      () => SettingsNotifier(),
+);

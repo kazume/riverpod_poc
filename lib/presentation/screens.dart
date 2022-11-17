@@ -1,7 +1,7 @@
-export 'home_screen.dart';
-export 'login_screen.dart';
-export 'onboarding_screen.dart';
-export 'settings_screen.dart';
+export 'view/home_screen.dart';
+export 'view/login_screen.dart';
+export 'view/onboarding_screen.dart';
+export 'view/settings_screen.dart';
 
 class Screens {
   static const settings = '/settings';
