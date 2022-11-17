@@ -5,16 +5,12 @@ import '../../data/repositories/settings_repository.dart';
 
 @immutable
 class SettingsState {
-  final bool onboardingComplete;
   final ThemeMode themeMode;
 
-  const SettingsState(this.onboardingComplete, this.themeMode);
+  const SettingsState(this.themeMode);
 
   SettingsState copyWith({bool? onboardingComplete, ThemeMode? themeMode}) =>
-      SettingsState(
-        onboardingComplete ?? this.onboardingComplete,
-        themeMode ?? this.themeMode,
-      );
+      SettingsState(themeMode ?? this.themeMode);
 }
 
 class SettingsNotifier extends Notifier<SettingsState> {
@@ -22,14 +18,8 @@ class SettingsNotifier extends Notifier<SettingsState> {
   SettingsState build() {
     final settingsService = ref.read(settingsRepositoryProvider);
     return SettingsState(
-      settingsService.onboardingComplete(),
       settingsService.themeMode(),
     );
-  }
-
-  setOnboardingComplete(bool complete) {
-    state = state.copyWith(onboardingComplete: complete);
-    ref.read(settingsRepositoryProvider).setOnboardingComplete(complete);
   }
 
   setThemeMode(ThemeMode themeMode) {
@@ -53,6 +43,4 @@ class SettingsNotifier extends Notifier<SettingsState> {
 }
 
 final settingsNotifierProvider =
-NotifierProvider<SettingsNotifier, SettingsState>(
-      () => SettingsNotifier(),
-);
+    NotifierProvider<SettingsNotifier, SettingsState>(() => SettingsNotifier());

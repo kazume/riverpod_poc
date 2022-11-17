@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../presentation/state/settings_state.dart';
+import '../data/repositories/settings_repository.dart';
 
 final navigationNotifierProvider =
     NotifierProvider<NavigationNotifier, NavigationState>(
@@ -14,11 +14,12 @@ final navigationNotifierProvider =
 class NavigationNotifier extends Notifier<NavigationState> {
   @override
   NavigationState build() {
-    final settings = ref.read(settingsNotifierProvider);
+    final onboardingComplete =
+        ref.read(settingsRepositoryProvider).onboardingComplete();
     return NavigationState(
       isLoggedIn: false,
       isSettingsSelected: false,
-      isOnboarded: settings.onboardingComplete,
+      isOnboarded: onboardingComplete,
     );
   }
 
@@ -37,9 +38,8 @@ class NavigationNotifier extends Notifier<NavigationState> {
       isSettingsSelected: onboarded && state.isSettingsSelected,
     );
 
-    ref
-        .read(settingsNotifierProvider.notifier)
-        .setOnboardingComplete(onboarded);
+    // persists
+    ref.read(settingsRepositoryProvider).setOnboardingComplete(onboarded);
   }
 
   void exitApp() {
