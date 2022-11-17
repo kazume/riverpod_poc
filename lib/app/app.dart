@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app_constants.dart';
 import 'app_router.dart';
-import 'settings_state.dart';
+import 'settings_notifier.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});

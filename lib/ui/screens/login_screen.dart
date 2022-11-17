@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../app/navigation_state.dart';
+import '../../app/navigation_notifier.dart';
 import '../common/pages.dart';
 import '../screens.dart';
 
