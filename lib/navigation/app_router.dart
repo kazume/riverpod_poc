@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_poc/preferences/preferences.dart';
 
 import '../navigation/navigation_state.dart';
 import '../screens/screens.dart';
@@ -18,9 +17,8 @@ class AppRouter extends RouterDelegate
       builder: (context, ref, child) {
         final navState = ref.watch(navigationNotifierProvider);
         final isOnboarded = navState.isOnboarded;
-        // ref.watch(settingsNotifierProvider
-        //     .select((value) => value.onboardingComplete));
-
+        final isSettingsSelected = navState.isSettingsSelected;
+        final isLoggedIn = navState.isLoggedIn;
         return Navigator(
           key: navigatorKey,
           observers: [HeroController()],
@@ -28,9 +26,9 @@ class AppRouter extends RouterDelegate
           onPopPage: (route, result) => _handlePopPage(ref, route, result),
           pages: [
             if (!isOnboarded) OnboardingScreen.page(),
-            if (isOnboarded && navState.isLoggedIn) HomeScreen.page(),
-            if (isOnboarded && !navState.isLoggedIn) LoginScreen.page(),
-            if (isOnboarded && navState.isSettingsSelected)
+            if (isOnboarded && isLoggedIn) HomeScreen.page(),
+            if (isOnboarded && !isLoggedIn) LoginScreen.page(),
+            if (isOnboarded && isSettingsSelected)
               SettingsScreen.page(),
           ],
         );
