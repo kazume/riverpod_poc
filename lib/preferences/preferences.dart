@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 
-final onboardedProvider = StateProvider<bool>(
-  (ref) => ref.watch(settingsNotifierProvider).onboardingComplete,
-);
+// final onboardedProvider = StateProvider<bool>(
+//   (ref) => ref.watch(settingsNotifierProvider).onboardingComplete,
+// );
 
 // class OnboardedNotifier extends Notifier<bool> {
 //   setOnboarded(bool onboarded) {

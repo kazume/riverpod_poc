@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_poc/navigation/navigation_state.dart';
+import 'package:riverpod_poc/preferences/preferences.dart';
 
 import '../screens/screens.dart';
 
@@ -18,6 +21,21 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
+      ),
+      body: Column(
+        children: [
+          Consumer(
+            builder: (context, ref, child) => OutlinedButton(
+              onPressed: () {
+                ref
+                    .read(navigationNotifierProvider.notifier)
+                    .setOnboarded(false);
+              },
+              child: child ?? const Text('click me'),
+            ),
+            child: const Text('De-Onboard'),
+          )
+        ],
       ),
     );
   }
