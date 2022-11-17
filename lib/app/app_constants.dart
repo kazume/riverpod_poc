@@ -1,0 +1,1 @@
+const appTitle = 'Riverpod Demo';
