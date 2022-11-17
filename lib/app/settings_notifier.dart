@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/repositories/settings_repository.dart';
+import '../data/repositories/settings_repository.dart';
 
 @immutable
 class SettingsState {

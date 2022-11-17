@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/pages.dart';
-import '../../navigation/navigation_state.dart';
+import '../../app/navigation_notifier.dart';
+import '../common/pages.dart';
 import '../screens.dart';
-import '../state/settings_state.dart';
+import '../../app/settings_notifier.dart';
 
 class HomeScreen extends ConsumerWidget {
   static FadingPage page() {

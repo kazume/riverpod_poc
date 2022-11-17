@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../navigation/app_router.dart';
-import '../presentation/state/settings_state.dart';
+import 'app_constants.dart';
+import 'app_router.dart';
+import 'settings_notifier.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});
@@ -10,7 +11,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Riverpod Demo',
+      title: appTitle,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ref.watch(settingsNotifierProvider).themeMode,
